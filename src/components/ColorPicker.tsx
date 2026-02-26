@@ -38,7 +38,7 @@ export function ColorPicker({ color, onChange, match }: ColorPickerProps) {
       <div className="flex flex-col gap-2">
         <h2 className="text-sm font-medium text-zinc-500 uppercase tracking-widest">Select Color</h2>
         <div className="relative flex items-center">
-          <div className="absolute left-4 w-8 h-8 rounded-full shadow-inner overflow-hidden border border-zinc-200">
+          <div className="absolute left-4 w-8 h-8 rounded-full overflow-hidden border border-zinc-200">
             <input
               type="color"
               value={color}
@@ -50,7 +50,7 @@ export function ColorPicker({ color, onChange, match }: ColorPickerProps) {
             type="text"
             value={hexInput}
             onChange={handleInputChange}
-            className="w-full pl-16 pr-4 py-4 bg-white border border-zinc-200 rounded-2xl text-lg font-mono focus:outline-none focus:ring-2 focus:ring-zinc-900 transition-all shadow-sm"
+            className="w-full pl-16 pr-4 py-4 bg-white border border-zinc-200 rounded-2xl text-lg font-mono focus:outline-none focus:ring-2 focus:ring-zinc-900 transition-all"
             placeholder="#000000"
           />
           <Pipette className="absolute right-4 text-zinc-400 pointer-events-none" size={20} />
@@ -68,7 +68,7 @@ export function ColorPicker({ color, onChange, match }: ColorPickerProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Tailwind Class Card */}
             <div 
-              className="group relative p-6 rounded-2xl border border-zinc-200 bg-white shadow-sm hover:shadow-md transition-all cursor-pointer overflow-hidden"
+              className="group relative p-6 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 transition-all cursor-pointer overflow-hidden"
               onClick={() => copyToClipboard(`bg-${match.name}-${match.shade}`, 'tw')}
             >
               <motion.div 
@@ -89,7 +89,7 @@ export function ColorPicker({ color, onChange, match }: ColorPickerProps) {
 
             {/* Hex Code Card */}
             <div 
-              className="group relative p-6 rounded-2xl shadow-sm hover:shadow-md transition-all cursor-pointer"
+              className="group relative p-6 rounded-2xl hover:border-zinc-300 transition-all cursor-pointer"
               onClick={() => copyToClipboard(match.hex, 'hex')}
             >
               <motion.div 

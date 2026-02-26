@@ -11,7 +11,7 @@ export function EcommerceCard({ color }: EcommerceCardProps) {
   const contrastColor = getContrastColor(color);
 
   return (
-    <div className="w-full max-w-sm bg-white rounded-3xl overflow-hidden shadow-xl border border-zinc-100">
+    <div className="w-full max-w-sm bg-white rounded-3xl overflow-hidden border border-zinc-100">
       {/* Image Container */}
       <div className="relative h-64 bg-zinc-50 p-6 flex items-center justify-center overflow-hidden">
         {/* Decorative background blob */}
@@ -41,7 +41,7 @@ export function EcommerceCard({ color }: EcommerceCardProps) {
         </motion.div>
 
         {/* Favorite Button */}
-        <button className="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur-sm rounded-full text-zinc-400 hover:text-red-500 transition-colors z-20 shadow-sm">
+        <button className="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur-sm rounded-full text-zinc-400 hover:text-red-500 transition-colors z-20 border border-white/50">
           <Heart size={18} />
         </button>
       </div>
@@ -70,21 +70,20 @@ export function EcommerceCard({ color }: EcommerceCardProps) {
         <div className="flex items-center gap-2 mt-2">
           <span className="text-xs font-medium text-zinc-500 mr-2">Color:</span>
           <motion.div 
-            className="w-6 h-6 rounded-full border-2 border-white shadow-md ring-1 ring-zinc-200"
+            className="w-6 h-6 rounded-full border-2 border-white ring-1 ring-zinc-200"
             animate={{ backgroundColor: color }}
             transition={{ duration: 0.5 }}
           />
-          <div className="w-6 h-6 rounded-full bg-zinc-800 border-2 border-white shadow-sm" />
-          <div className="w-6 h-6 rounded-full bg-zinc-200 border-2 border-white shadow-sm" />
+          <div className="w-6 h-6 rounded-full bg-zinc-800 border-2 border-white" />
+          <div className="w-6 h-6 rounded-full bg-zinc-200 border-2 border-white" />
         </div>
 
         {/* Action Button */}
         <motion.button 
-          className="mt-4 w-full py-4 rounded-2xl font-semibold flex items-center justify-center gap-2 shadow-lg transition-transform hover:scale-[1.02] active:scale-[0.98]"
+          className="mt-4 w-full py-4 rounded-2xl font-semibold flex items-center justify-center gap-2 transition-transform hover:scale-[1.02] active:scale-[0.98]"
           animate={{ 
             backgroundColor: color, 
-            color: contrastColor,
-            boxShadow: `0 10px 25px -5px ${color}66`
+            color: contrastColor
           }}
           transition={{ duration: 0.5 }}
         >

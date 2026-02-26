@@ -29,9 +29,9 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-zinc-50 text-zinc-900 font-sans selection:bg-zinc-200">
       {/* Header */}
-      <header className="max-w-7xl mx-auto w-full px-6 py-8 md:px-12 flex items-center justify-between gap-3">
+      <header className="max-w-7xl mx-auto w-full px-6 py-8 md:px-12 lg:px-16 xl:px-32 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-white rounded-xl shadow-sm border border-zinc-200">
+          <div className="p-2 bg-white rounded-xl border border-zinc-200">
             <Palette className="text-zinc-900" size={24} />
           </div>
           <h1 className="text-xl font-semibold tracking-tight">Tailwind Matcher</h1>
@@ -41,21 +41,26 @@ export default function App() {
           href="https://github.com/princekouame/tailwind-color-matcher" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-3 py-2 bg-white rounded-xl shadow-sm border border-zinc-200 hover:bg-zinc-50 transition-colors text-sm font-medium text-zinc-700"
+          className="flex items-center gap-2 px-3 py-2 bg-white rounded-xl border border-zinc-200 hover:bg-zinc-50 transition-colors text-sm font-medium text-zinc-700"
         >
           <Github size={18} />
-          <span className="hidden sm:inline">Star on GitHub</span>
-          {githubStars !== null && (
-            <span className="flex items-center gap-1 bg-zinc-100 px-2 py-0.5 rounded-md text-zinc-900">
+          <span className="hidden sm:inline">On GitHub</span>
+          {githubStars !== null ? (
+            <span className="flex items-center gap-1 bg-zinc-100 px-2 py-0.5 rounded-md text-zinc-900 text-xs font-medium">
               <Star size={12} className="fill-zinc-400 text-zinc-400" />
-              {githubStars}
+              {githubStars.toLocaleString()}
+            </span>
+          ) : (
+            <span className="flex items-center gap-1 bg-zinc-100 px-2 py-0.5 rounded-md text-zinc-400 text-xs font-medium">
+              <Star size={12} className="fill-zinc-300 text-zinc-300" />
+              ...
             </span>
           )}
         </a>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 max-w-7xl mx-auto w-full px-6 md:px-12 py-12 flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-32">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-6 md:px-12 lg:px-16 xl:px-32 py-12 flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-32">
         
         {/* Left Column: Controls */}
         <div className="w-full lg:w-1/2 flex flex-col justify-center">
@@ -79,7 +84,7 @@ export default function App() {
           <div className="relative">
             {/* Decorative background elements */}
             <div className="absolute -inset-4 bg-gradient-to-tr from-zinc-200 to-zinc-50 rounded-[2.5rem] transform rotate-3 -z-10 opacity-50" />
-            <div className="absolute -inset-4 bg-white rounded-[2.5rem] transform -rotate-2 -z-10 shadow-sm border border-zinc-100" />
+            <div className="absolute -inset-4 bg-white rounded-[2.5rem] transform -rotate-2 -z-10 border border-zinc-100" />
             
             <EcommerceCard color={match ? match.hex : color} />
           </div>
@@ -88,7 +93,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="max-w-7xl mx-auto w-full px-6 py-8 md:px-12 flex items-center justify-center">
+      <footer className="max-w-7xl mx-auto w-full px-6 py-8 md:px-12 lg:px-16 xl:px-32 flex items-center justify-center">
         <p className="text-sm text-zinc-500">
           App by <a href="https://www.princekouame.com" target="_blank" rel="noopener noreferrer" className="text-zinc-900 hover:underline font-medium transition-colors">Prince Kouamé</a>
         </p>
