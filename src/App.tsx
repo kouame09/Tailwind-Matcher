@@ -1,0 +1,98 @@
+import React, { useState, useEffect } from 'react';
+import { ColorPicker } from './components/ColorPicker';
+import { EcommerceCard } from './components/EcommerceCard';
+import { findClosestTailwindColor, TailwindColorMatch } from './utils/colors';
+import { Palette, Github, Star } from 'lucide-react';
+
+export default function App() {
+  const [color, setColor] = useState('#6366f1'); // Default indigo-500
+  const [match, setMatch] = useState<TailwindColorMatch | null>(null);
+  const [githubStars, setGithubStars] = useState<number | null>(null);
+
+  useEffect(() => {
+    const closest = findClosestTailwindColor(color);
+    setMatch(closest);
+  }, [color]);
+
+  useEffect(() => {
+    // Fetch GitHub stars (using a placeholder repo name based on the author)
+    fetch('https://api.github.com/repos/princekouame/tailwind-color-matcher')
+      .then(res => res.json())
+      .then(data => {
+        if (data.stargazers_count !== undefined) {
+          setGithubStars(data.stargazers_count);
+        }
+      })
+      .catch(console.error);
+  }, []);
+
+  return (
+    <div className="min-h-screen flex flex-col bg-zinc-50 text-zinc-900 font-sans selection:bg-zinc-200">
+      {/* Header */}
+      <header className="max-w-7xl mx-auto w-full px-6 py-8 md:px-12 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-white rounded-xl shadow-sm border border-zinc-200">
+            <Palette className="text-zinc-900" size={24} />
+          </div>
+          <h1 className="text-xl font-semibold tracking-tight">Tailwind Matcher</h1>
+        </div>
+
+        <a 
+          href="https://github.com/princekouame/tailwind-color-matcher" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-3 py-2 bg-white rounded-xl shadow-sm border border-zinc-200 hover:bg-zinc-50 transition-colors text-sm font-medium text-zinc-700"
+        >
+          <Github size={18} />
+          <span className="hidden sm:inline">Star on GitHub</span>
+          {githubStars !== null && (
+            <span className="flex items-center gap-1 bg-zinc-100 px-2 py-0.5 rounded-md text-zinc-900">
+              <Star size={12} className="fill-zinc-400 text-zinc-400" />
+              {githubStars}
+            </span>
+          )}
+        </a>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1 max-w-7xl mx-auto w-full px-6 md:px-12 py-12 flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-32">
+        
+        {/* Left Column: Controls */}
+        <div className="w-full lg:w-1/2 flex flex-col justify-center">
+          <div className="mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
+              Find your perfect <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-900 to-zinc-500">
+                Tailwind shade.
+              </span>
+            </h2>
+            <p className="text-lg text-zinc-500 max-w-md">
+              Pick any color and instantly get its closest Tailwind CSS equivalent, ready to use in your next project.
+            </p>
+          </div>
+
+          <ColorPicker color={color} onChange={setColor} match={match} />
+        </div>
+
+        {/* Right Column: Visualization */}
+        <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+          <div className="relative">
+            {/* Decorative background elements */}
+            <div className="absolute -inset-4 bg-gradient-to-tr from-zinc-200 to-zinc-50 rounded-[2.5rem] transform rotate-3 -z-10 opacity-50" />
+            <div className="absolute -inset-4 bg-white rounded-[2.5rem] transform -rotate-2 -z-10 shadow-sm border border-zinc-100" />
+            
+            <EcommerceCard color={match ? match.hex : color} />
+          </div>
+        </div>
+
+      </main>
+
+      {/* Footer */}
+      <footer className="max-w-7xl mx-auto w-full px-6 py-8 md:px-12 flex items-center justify-center">
+        <p className="text-sm text-zinc-500">
+          App by <a href="https://www.princekouame.com" target="_blank" rel="noopener noreferrer" className="text-zinc-900 hover:underline font-medium transition-colors">Prince Kouamé</a>
+        </p>
+      </footer>
+    </div>
+  );
+}
