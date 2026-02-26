@@ -16,14 +16,24 @@ export default function App() {
 
   useEffect(() => {
     // Fetch GitHub stars (using a placeholder repo name based on the author)
-    fetch('https://api.github.com/repos/princekouame/tailwind-color-matcher')
-      .then(res => res.json())
-      .then(data => {
-        if (data.stargazers_count !== undefined) {
-          setGithubStars(data.stargazers_count);
-        }
-      })
-      .catch(console.error);
+    const fetchStars = () => {
+      fetch('https://api.github.com/repos/princekouame/tailwind-color-matcher')
+        .then(res => res.json())
+        .then(data => {
+          if (data.stargazers_count !== undefined) {
+            setGithubStars(data.stargazers_count);
+          }
+        })
+        .catch(console.error);
+    };
+
+    // Initial fetch
+    fetchStars();
+
+    // Refresh every 5 minutes (300000 ms)
+    const interval = setInterval(fetchStars, 300000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
