@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ColorPicker } from './components/ColorPicker';
 import { EcommerceCard } from './components/EcommerceCard';
 import { findClosestTailwindColor, TailwindColorMatch } from './utils/colors';
-import { Palette, Github, Star } from 'lucide-react';
+import { Palette, Github, Star, Heart } from 'lucide-react';
 
 export default function App() {
   const [color, setColor] = useState('#6366f1'); // Default indigo-500
@@ -104,9 +104,20 @@ export default function App() {
 
       {/* Footer */}
       <footer className="max-w-7xl mx-auto w-full px-6 py-8 md:px-12 lg:px-16 xl:px-32 flex items-center justify-center">
-        <p className="text-sm text-zinc-500">
-          App by <a href="https://www.princekouame.com" target="_blank" rel="noopener noreferrer" className="text-zinc-900 hover:underline font-medium transition-colors">Prince Kouamé</a>
-        </p>
+        <div className="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-zinc-300/60">
+          <Heart size={14} className="text-red-400 fill-red-400" />
+          <span className="text-xs text-zinc-600 font-medium">
+            App by{' '}
+            <a
+              href="https://www.princekouame.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-900 hover:text-zinc-700 font-semibold transition-colors underline decoration-1 underline-offset-2"
+            >
+              Prince Kouamé
+            </a>
+          </span>
+        </div>
       </footer>
     </div>
   );
